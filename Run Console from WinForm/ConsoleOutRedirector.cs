@@ -15,7 +15,9 @@ public class ConsoleOutRedirector : IDisposable
 
             SafeFileHandle safeFileHandle = new SafeFileHandle(stdHandle, true);
             FileStream fileStream = new FileStream(safeFileHandle, FileAccess.Write);
-            //Encoding encoding = Encoding.GetEncoding(NativeMethods.MY_CODE_PAGE); // <= For .Net Framework 4.8 or before
+            // Install "System.Text.Encoding.CodePages" from NuGet Package Management to use "Encoding.RegisterProvider()"
+            Encoding.RegisterProvider(CodePagesEncodingProvider.Instance); // <= For .NetCore which does not include code page 437 by default!
+            Encoding encoding = Encoding.GetEncoding(NativeMethods.MY_CODE_PAGE);  
             Encoding encoding = Encoding.Default;  // <- For .Net6.0 or later
             StreamWriter standardOutput = new StreamWriter(fileStream, encoding);
             standardOutput.AutoFlush = true;
