@@ -6,7 +6,7 @@ private void btnRunBatch_Click(object sender, EventArgs e)
                 BatchResults = null;
             }
 
-            string myProgramExePath = txtExePath.Text.Trim();
+            string myProgramExePath = txtExePath.Text.Trim(); // Console에서 실행시킬 프로그램 실행파일 경로
 
             if (!File.Exists(myProgramExePath))
             {
@@ -14,7 +14,7 @@ private void btnRunBatch_Click(object sender, EventArgs e)
                 return;
             }
 
-            List<string>? BatchListToRun = BatchListToShow;
+            List<string>? BatchListToRun = BatchListToShow;  
             if (BatchListToRun is null) return;
 
             progress = new Progress<ProgressReportModel>();
